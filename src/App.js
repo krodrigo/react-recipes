@@ -20,6 +20,7 @@ const App = () => {
     );
     const data = await response.json();
     setRecipes(data.hits);
+    setSearch('');
   };
 
   const updateSearch = e => {
@@ -29,7 +30,6 @@ const App = () => {
   const getSearch = e => {
     e.preventDefault();
     setQuery(search);
-    setSearch('');
   };
 
   return (
@@ -45,15 +45,17 @@ const App = () => {
           Pesquisar
         </button>
       </form>
-      {recipes.map((recipe, index) => 
-        <Recipe
-          key={index}
-          title={recipe.recipe.label}
-          calories={recipe.recipe.calories}
-          image={recipe.recipe.image}
-          ingredients={recipe.recipe.ingredients}
-        />
-      )}
+      <div className="recipes">
+        {recipes.map((recipe, index) => (
+          <Recipe
+            key={index}
+            title={recipe.recipe.label}
+            calories={recipe.recipe.calories}
+            image={recipe.recipe.image}
+            ingredients={recipe.recipe.ingredients}
+          />
+        ))}
+      </div>
     </div>
   );
 };
